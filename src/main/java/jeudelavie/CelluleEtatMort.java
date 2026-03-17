@@ -1,3 +1,5 @@
+package jeudelavie;
+
 /* Implémente l'état mort */
 
 public class CelluleEtatMort implements CelluleEtat{

@@ -1,3 +1,4 @@
+package jeudelavie;
 /* Implémente l'état vivant */
 
 public class CelluleEtatVivant implements CelluleEtat{

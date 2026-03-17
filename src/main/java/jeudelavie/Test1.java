@@ -1,4 +1,6 @@
-public class test1 {
+package jeudelavie;
+
+public class Test1 {
     public static void main(String[] args){
         // Création cellule morte
         Cellule c = new Cellule(CelluleEtatMort.getInstance());

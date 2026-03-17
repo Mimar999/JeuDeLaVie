@@ -1,3 +1,4 @@
+package jeudelavie;
 /* Une cellule possède un état et redirige les appels de méthodes vers cet état  */
 
 public class Cellule {
