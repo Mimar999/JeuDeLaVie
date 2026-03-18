@@ -28,4 +28,9 @@ public class CelluleEtatMort implements CelluleEtat{
     public boolean estVivante(){
         return false;
     }
+
+    @Override
+    public void accepte(Visiteur visiteur, Cellule cellule){
+        visiteur.visiteCelluleMorte(cellule);
+    }
 }

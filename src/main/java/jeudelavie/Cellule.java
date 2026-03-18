@@ -42,4 +42,8 @@ public class Cellule {
         }
         return count;
     }
+
+    public void accepte(Visiteur visiteur){
+        this.etat.accepte(visiteur, this);
+    }
 }

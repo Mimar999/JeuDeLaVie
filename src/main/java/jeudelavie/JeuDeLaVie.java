@@ -12,6 +12,8 @@ public class JeuDeLaVie implements Observable {
 
     private List<Commande> commandes;
 
+    private Visiteur visiteur;
+
     // CONSTR
 
     public JeuDeLaVie(int xMax, int yMax){
@@ -20,6 +22,7 @@ public class JeuDeLaVie implements Observable {
         this.grille = new Cellule[xMax][yMax];
         this.observateurs = new ArrayList<>();
         this.commandes = new ArrayList<>();
+        this.visiteur = new VisiteurClassique(this);
         initialiseGrille();
     }
 
@@ -71,6 +74,25 @@ public class JeuDeLaVie implements Observable {
         }
 
         commandes.clear(); // vidage de la liste une fois exécutée
+    }
+
+    public void distribueVisiteur(){
+        for(int x = 0; x < xMax; x++){
+            for(int y = 0; y < yMax; y++){
+                grille[x][y].accepte(visiteur);
+            }
+        }
+    }
+
+    public void calculerGenerationSuivante(){
+        //analyse la grille et crée les commandes 
+        distribueVisiteur();
+
+        // exécute les naissances et morts d'un coup 
+        executeCommande();
+
+        // redissine/demande à l'interface graphique de se redessiner 
+        notifieObservateur();
     }
 
 

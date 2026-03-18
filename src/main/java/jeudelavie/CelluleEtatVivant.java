@@ -27,4 +27,10 @@ public class CelluleEtatVivant implements CelluleEtat{
     public boolean estVivante(){
         return true;
     }
+
+    @Override
+    public void accepte(Visiteur visiteur, Cellule cellule){
+        // vivant donc appelle méthode pour cellule vivante 
+        visiteur.visiteCelluleVivante(cellule);
+    }
 }
