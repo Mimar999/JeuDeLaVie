@@ -1,9 +1,14 @@
 package jeudelavie;
 
-public class JeuDeLaVie {
+import java.util.ArrayList;
+import java.util.List;
+
+public class JeuDeLaVie implements Observable {
     private Cellule[][] grille;
     private int xMax;
     private int yMax;
+
+    private List<Observateur> observateurs;
 
     // CONSTR
 
@@ -11,6 +16,7 @@ public class JeuDeLaVie {
         this.xMax = xMax;
         this.yMax = yMax;
         this.grille = new Cellule[xMax][yMax];
+        this.observateurs = new ArrayList<>();
         initialiseGrille();
     }
 
@@ -33,6 +39,23 @@ public class JeuDeLaVie {
             return grille[x][y];
         }
         return null; // si case en dehors de la grille
+    }
+
+    @Override
+    public void attacheObservateur(Observateur o){
+        observateurs.add(o);
+    }
+
+    @Override
+    public void detacheObservateur(Observateur o){
+        observateurs.remove(o);
+    }
+
+    @Override
+    public void notifieObservateur(){
+        for(Observateur o : observateurs){
+            o.actualise();
+        }
     }
 
 

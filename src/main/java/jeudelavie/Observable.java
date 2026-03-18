@@ -1,0 +1,7 @@
+package jeudelavie;
+
+public interface Observable {
+    void attacheObservateur(Observateur o);
+    void detacheObservateur(Observateur o);
+    void notifieObservateur();
+}
