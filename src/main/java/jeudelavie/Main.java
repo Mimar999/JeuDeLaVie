@@ -6,7 +6,7 @@ public class Main {
         JeuDeLaVie jeu = new JeuDeLaVie(100, 70);
 
         // HighLife
-        jeu.setVisiteur(new VisiteurHighLife(jeu));
+        // jeu.setVisiteur(new VisiteurHighLife(jeu));
         // HighLife
 
         JeuDeLaVieUI fenetre = new JeuDeLaVieUI(jeu);
@@ -16,13 +16,5 @@ public class Main {
         jeu.attacheObservateur(console);
 
         System.out.println("Démarrage du jeu de la vie.");
-
-        // Boucle/simulation
-        while(true){
-            jeu.calculerGenerationSuivante();
-
-            //Petite pause entre chaque génération
-            Thread.sleep(100);
-        }
     }
 }
