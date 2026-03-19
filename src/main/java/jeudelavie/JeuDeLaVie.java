@@ -14,6 +14,8 @@ public class JeuDeLaVie implements Observable {
 
     private Visiteur visiteur;
 
+    private int generation = 0; // compteur de génération
+
     // CONSTR
 
     public JeuDeLaVie(int xMax, int yMax){
@@ -91,9 +93,21 @@ public class JeuDeLaVie implements Observable {
         // exécute les naissances et morts d'un coup 
         executeCommande();
 
+        generation++; //incrémentation du compteur
         // redissine/demande à l'interface graphique de se redessiner 
         notifieObservateur();
     }
+
+    // méthode pour changer les règles (highlife)
+    public void setVisiteur(Visiteur visiteur){
+        this.visiteur = visiteur;
+    }
+
+    //récup du num de la génération
+    public int getGeneration(){
+        return generation;
+    }
+    
 
 
     // GETTERS
