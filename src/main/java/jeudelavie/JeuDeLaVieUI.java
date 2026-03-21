@@ -2,6 +2,7 @@ package jeudelavie;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class JeuDeLaVieUI extends JFrame implements Observateur {
     private JeuDeLaVie jeu;
@@ -65,6 +66,18 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
 
     // classe interner pour le dessin
     private class GrillePanel extends JPanel{
+
+        public GrillePanel(){
+            this.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e){
+                    int grilleX = e.getX() / 10;
+                    int grilleY = e.getY() / 10;
+
+                    jeu.inverserEtatCellule(grilleX, grilleY);
+                }
+            });
+        }
         @Override
         protected void paintComponent(Graphics g){
             super.paintComponent(g);

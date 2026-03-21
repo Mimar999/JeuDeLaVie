@@ -42,11 +42,24 @@ public class JeuDeLaVie implements Observable {
     }
 
     public Cellule getGrilleXY(int x, int y){
-        // pour éviter les IndexOutOfBoundsException sur les bords de la grille 
-        if (x >= 0 && x < xMax && y >= 0 && y < yMax){
-            return grille[x][y];
+        int xTorique = (x + xMax) % xMax;
+        int yTorique = (y + yMax) % yMax;
+
+        return grille[xTorique][yTorique]; 
+    }
+
+    // méthode pour permettre d'inverser l'état d'une cellule là o`u on clique
+    public void inverserEtatCellule(int x, int y){
+        Cellule c = getGrilleXY(x, y);
+        if(c != null){
+            if(c.estVivante()){
+                c.meurt();
+            }
+            else{
+                c.vit();
+            }
+            notifieObservateur();
         }
-        return null; // si case en dehors de la grille
     }
 
     @Override
