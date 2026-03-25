@@ -120,6 +120,34 @@ public class JeuDeLaVie implements Observable {
     public int getGeneration(){
         return generation;
     }
+
+    // méthode pour vider la grille totalement
+    public void viderGrille(){
+        for(int x = 0; x < xMax; x++){
+            for(int y = 0; y < yMax; y++){
+                if(grille[x][y].estVivante()){
+                    grille[x][y].meurt();
+                }
+            }
+        }
+        notifieObservateur();
+    }
+
+    // fait apparaître un planeur au milieu de l'écran
+    public void dessinerPlaneur(){
+        viderGrille();
+        int cx = xMax / 2;
+        int cy = yMax / 2;
+
+        // coordonnées
+        getGrilleXY(cx, cy - 1).vit();
+        getGrilleXY(cx + 1, cy).vit();
+        getGrilleXY(cx - 1, cy + 1).vit();
+        getGrilleXY(cx, cy + 1).vit();
+        getGrilleXY(cx + 1, cy + 1).vit();
+
+        notifieObservateur();
+    }
     
 
 

@@ -1,8 +1,8 @@
 package jeudelavie;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class JeuDeLaVieUI extends JFrame implements Observateur {
     private JeuDeLaVie jeu;
@@ -23,7 +23,8 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
         JButton btnPlay = new JButton("Play");
         JButton btnPause = new JButton("Pause");
         JButton btnNext = new JButton("Avancer (1 génération)");
-
+        JButton btnClear = new JButton("Effacer grille");
+        JButton btnPlaneur = new JButton("Planeur");
         // Slider fluctuant entre 10 et 1000ms mais mit à défaut à 1000ms 
         JSlider speedSlider = new JSlider(10, 1000, 100);
 
@@ -42,6 +43,15 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
             }
         });
 
+        btnClear.addActionListener(e -> {
+            timer.stop();
+            jeu.viderGrille();
+        });
+
+        btnPlaneur.addActionListener(e -> {
+            timer.stop();
+            jeu.dessinerPlaneur();
+        });
         // Si on bouge le slider cela change la vitesse du timer
         speedSlider.addChangeListener(e -> timer.setDelay(speedSlider.getValue()));
 
@@ -51,6 +61,8 @@ public class JeuDeLaVieUI extends JFrame implements Observateur {
         controlPanel.add(btnNext);
         controlPanel.add(new JLabel("Vitesse de l'animation"));
         controlPanel.add(speedSlider);
+        controlPanel.add(btnClear);
+        controlPanel.add(btnPlaneur);
         this.add(controlPanel, BorderLayout.SOUTH);
 
         // Config de la fenêtre 
