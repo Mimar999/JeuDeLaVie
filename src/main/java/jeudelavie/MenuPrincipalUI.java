@@ -6,8 +6,8 @@ import java.awt.*;
 public class MenuPrincipalUI extends JFrame {
     public MenuPrincipalUI(){
         this.setTitle("Configuration | Jeu de la Vie");
-        this.setSize(350, 250);
-        this.setLayout(new GridLayout(4, 1, 10, 10)); // grille de 4 lignes
+        this.setSize(350, 300);
+        this.setLayout(new GridLayout(5, 1, 10, 10)); // grille de 4 lignes
         this.setLocationRelativeTo(null); // centre la fenêtre sur l'écran
 
         // titre
@@ -30,6 +30,14 @@ public class MenuPrincipalUI extends JFrame {
         pnlY.add(txtY);
         this.add(pnlY);
 
+        // menu déroulant pour les règles (highlife, day and night)
+        JPanel pnlRegles = new JPanel();
+        pnlRegles.add(new JLabel("Règles du jeu : "));
+        String[] choixRegles = {"Classique (Conway)", "HighLife", "Day & Night"};
+        JComboBox<String> comboRegles = new JComboBox<>(choixRegles);
+        pnlRegles.add(comboRegles);
+        this.add(pnlRegles);
+
         // Bouton start
         JButton btnStart = new JButton("LANCER LA SIMULATON");
         btnStart.setBackground(new Color(46, 204, 113));
@@ -45,11 +53,26 @@ public class MenuPrincipalUI extends JFrame {
 
                 // Lancement du jeu 
                 JeuDeLaVie jeu = new JeuDeLaVie(x, y);
-                JeuDeLaVieUI fenetre = new JeuDeLaVieUI(jeu);
+
+                // application de la règle choisie
+                String regleChoisie = (String) comboRegles.getSelectedItem();
+                if(regleChoisie.equals("HighLife")){
+                    jeu.setVisiteur(new VisiteurHighLife(jeu));
+                    jeu.setMessageSysteme("Mode : HighLife");
+                }
+                else if(regleChoisie.equals("Day & Night")){
+                    jeu.setVisiteur(new VisiteurDayAndNight(jeu));
+                    jeu.setMessageSysteme("Mode : Day & Night");
+                }
+                else{
+                    jeu.setMessageSysteme("Mode : Classique");
+                }
+                
                 
                 ObservateurConsole console = new ObservateurConsole(jeu);
                 jeu.attacheObservateur(console);
                 
+                JeuDeLaVieUI fenetre = new JeuDeLaVieUI(jeu);
                 jeu.attacheObservateur(fenetre);
                 
                 // Ferme le menu d'accueil
